@@ -69,7 +69,7 @@ const ProductSection: React.FC = () => {
     <div className="relative z-20 min-h-screen py-20 md:py-32 px-6 md:px-12 lg:px-24">
       <style>{`
         @keyframes dash {
-          to { stroke-dashoffset: -20; }
+          to { stroke-dashoffset: -16; }
         }
         .animate-dash {
           stroke-dasharray: 4, 4;
@@ -96,7 +96,7 @@ const ProductSection: React.FC = () => {
       <div className="max-w-7xl mx-auto">
         <div className="mb-16 md:mb-24 max-w-4xl reveal">
           <span className="text-blue-400 text-[10px] font-bold tracking-[0.4em] uppercase mb-4 md:mb-6 block">Current Product</span>
-          <h2 className="text-[30px] md:text-7xl font-light mb-6 md:mb-8">Clinomic <span className="font-medium">Labs</span></h2>
+          <img src="/clinomic-labs-logo.png" alt="Clinomic Labs" className="w-[200px] md:w-[350px] mb-6 md:mb-8 object-contain" />
           <p className="text-white text-[16px] md:text-lg lg:text-xl font-light leading-relaxed italic mb-6 md:mb-8 border-l border-blue-400/50 pl-4 md:pl-6">
             "A Clinical Intelligence Platform by Arogya BioX"
           </p>
@@ -240,7 +240,7 @@ const ProductSection: React.FC = () => {
               {steps.map((step, i) => (
                 <div key={i} className={`relative z-10 flex flex-col items-center text-center group reveal stagger-${(i % 3) + 1}`}>
                   <div className="relative mb-6 md:mb-8">
-                    <div className="w-10 h-10 md:w-11 lg:w-12 md:h-11 lg:h-12 rounded-full glass-effect border border-white/20 flex items-center justify-center text-xs md:text-[11px] lg:text-sm font-bold group-hover:border-blue-400 group-hover:scale-110 transition-all z-20 relative bg-black">
+                    <div className="w-10 h-10 md:w-11 lg:w-12 md:h-11 lg:h-12 rounded-full glass-effect border border-white/20 flex items-center justify-center text-xs md:text-[11px] lg:text-sm font-bold group-hover:border-blue-400 group-hover:scale-110 transition-all z-20 relative !bg-black">
                       {i + 1}
                     </div>
                     <div className="absolute inset-0 w-10 h-10 md:w-11 lg:w-12 md:h-11 lg:h-12 rounded-full border border-blue-400/30 pulse-glow z-10 group-hover:scale-125 transition-transform duration-500"></div>

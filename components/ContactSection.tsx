@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const ContactSection: React.FC = () => {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' });
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -22,7 +22,7 @@ const ContactSection: React.FC = () => {
       if (response.ok) {
         setStatus('success');
         alert('Thank you for contacting Arogya BioX. Our partnership team will respond within 24 hours.');
-        setFormData({ name: '', email: '', message: '' });
+        setFormData({ name: '', email: '', phone: '', message: '' });
       }
 
       if (!response.ok) {
@@ -95,6 +95,23 @@ const ContactSection: React.FC = () => {
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 placeholder="Email"
+                className="w-full bg-white/5 border border-white/20 rounded-xl md:rounded-2xl px-5 py-3 md:px-6 md:py-4 text-sm text-white focus:outline-none focus:border-blue-400/50 transition-all placeholder:text-white/20"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-[9px] md:text-[10px] text-white/50 uppercase tracking-[0.2em] font-medium ml-1">Contact Number</label>
+              <input
+                type="tel"
+                required
+                pattern="[0-9]{10}"
+                title="Please enter a valid 10-digit phone number"
+                value={formData.phone}
+                onChange={(e) => {
+                  const value = e.target.value.replace(/\D/g, '').slice(0, 10);
+                  setFormData({ ...formData, phone: value });
+                }}
+                placeholder="Phone Number (10 digits)"
                 className="w-full bg-white/5 border border-white/20 rounded-xl md:rounded-2xl px-5 py-3 md:px-6 md:py-4 text-sm text-white focus:outline-none focus:border-blue-400/50 transition-all placeholder:text-white/20"
               />
             </div>

@@ -9,7 +9,8 @@ const CompanyBackground: React.FC = () => {
   return (
     <div className="relative z-20 py-20 md:py-40 px-6 md:px-12 lg:px-24 flex flex-col justify-center">
       <div className="max-w-6xl mx-auto">
-        <span className="text-blue-300 text-[10px] font-bold tracking-[0.4em] uppercase mb-6 md:mb-8 block">About Arogya BioX</span>
+        <span className="text-blue-300 text-[10px] font-bold tracking-[0.4em] uppercase mb-4 md:mb-6 block">ABOUT US</span>
+        <img src="/arogya-logo-full.png" alt="Arogya BioX" className="h-[34px] md:h-[52px] lg:h-[64px] w-auto mb-8 md:mb-10 object-contain" />
 
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-start">
           <div>

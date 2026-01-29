@@ -17,9 +17,9 @@ app.use(express.json());
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 app.post('/api/send-email', async (req, res) => {
-    const { name, email, message } = req.body;
+    const { name, email, phone, message } = req.body;
 
-    if (!name || !email || !message) {
+    if (!name || !email || !phone || !message) {
         return res.status(400).json({ error: 'Missing required fields' });
     }
 
@@ -34,6 +34,7 @@ app.post('/api/send-email', async (req, res) => {
           <h2>New Contact Form Submission</h2>
           <p><strong>Name:</strong> ${name}</p>
           <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Phone:</strong> ${phone}</p>
           <p><strong>Message:</strong></p>
           <p>${message}</p>
         </div>
