@@ -169,7 +169,7 @@ const ProductSection: React.FC = () => {
                   <div className="scan-line" style={{ top: `${scanProgress}%` }}></div>
                 )}
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-2">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-2 h-[320px] overflow-y-auto pr-2 md:h-auto md:overflow-visible md:pr-0">
                   {patientData.map((row, idx) => (
                     <div key={idx} className="flex justify-between items-center py-2 border-b border-white/5 group-hover:border-white/10 transition-colors">
                       <span className="text-[10px] md:text-xs text-white/70 group-hover:text-white transition-colors uppercase tracking-wider">{row.l}</span>
