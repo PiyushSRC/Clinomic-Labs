@@ -13,6 +13,48 @@ const ProductSection: React.FC = () => {
   const [scanProgress, setScanProgress] = useState(0);
   const [scanResult, setScanResult] = useState<null | { risk: string, color: string, details: string }>(null);
 
+  // Base data configuration with numeric values for randomization
+  const basePatientData = [
+    { l: "WBC", v: 6.42, u: "10⁹/L", p: 2 },
+    { l: "Lymph#", v: 1.85, u: "10⁹/L", p: 2 },
+    { l: "Mid#", v: 0.52, u: "10⁹/L", p: 2 },
+    { l: "Gran#", v: 4.05, u: "10⁹/L", p: 2 },
+    { l: "Lymph%", v: 28.8, u: "%", p: 1 },
+    { l: "Mid%", v: 8.1, u: "%", p: 1 },
+    { l: "Gran%", v: 63.1, u: "%", p: 1 },
+    { l: "RBC", v: 3.82, u: "10¹²/L", p: 2 },
+    { l: "HGB", v: 11.2, u: "g/dL", p: 1 },
+    { l: "HCT", v: 34.5, u: "%", p: 1 },
+    { l: "MCV", v: 102.4, u: "fL", p: 1 },
+    { l: "MCH", v: 34.1, u: "pg", p: 1 },
+    { l: "MCHC", v: 32.4, u: "g/dL", p: 1 },
+    { l: "RDW-CV", v: 15.8, u: "%", p: 1 },
+    { l: "RDW-SD", v: 52.1, u: "fL", p: 1 },
+    { l: "PLT", v: 142, u: "10⁹/L", p: 0 },
+    { l: "MPV", v: 10.8, u: "fL", p: 1 },
+    { l: "PDW", v: 12.4, u: "", p: 1 },
+    { l: "PCT", v: 0.15, u: "%", p: 2 },
+    { l: "P-LCC", v: 42, u: "10⁹/L", p: 0 },
+    { l: "P-LCR", v: 28.5, u: "%", p: 1 }
+  ];
+
+  const [patientData, setPatientData] = useState<{ l: string, v: string, u: string }[]>([]);
+
+  // Function to generate random data based on base values
+  const generateRandomData = () => {
+    return basePatientData.map(item => {
+      // Random variation between -10% and +10%
+      const variation = 1 + (Math.random() * 0.2 - 0.1);
+      const newValue = (item.v * variation).toFixed(item.p);
+      return { l: item.l, v: newValue, u: item.u };
+    });
+  };
+
+  // Initialize data on mount
+  useEffect(() => {
+    setPatientData(generateRandomData());
+  }, []);
+
   const startSimulation = () => {
     setIsScanning(true);
     setScanProgress(0);
@@ -40,30 +82,6 @@ const ProductSection: React.FC = () => {
       return () => clearInterval(interval);
     }
   }, [isScanning]);
-
-  const patientData = [
-    { l: "WBC", v: "6.42", u: "10⁹/L" },
-    { l: "Lymph#", v: "1.85", u: "10⁹/L" },
-    { l: "Mid#", v: "0.52", u: "10⁹/L" },
-    { l: "Gran#", v: "4.05", u: "10⁹/L" },
-    { l: "Lymph%", v: "28.8", u: "%" },
-    { l: "Mid%", v: "8.1", u: "%" },
-    { l: "Gran%", v: "63.1", u: "%" },
-    { l: "RBC", v: "3.82", u: "10¹²/L" },
-    { l: "HGB", v: "11.2", u: "g/dL" },
-    { l: "HCT", v: "34.5", u: "%" },
-    { l: "MCV", v: "102.4", u: "fL" },
-    { l: "MCH", v: "34.1", u: "pg" },
-    { l: "MCHC", v: "32.4", u: "g/dL" },
-    { l: "RDW-CV", v: "15.8", u: "%" },
-    { l: "RDW-SD", v: "52.1", u: "fL" },
-    { l: "PLT", v: "142", u: "10⁹/L" },
-    { l: "MPV", v: "10.8", u: "fL" },
-    { l: "PDW", v: "12.4", u: "" },
-    { l: "PCT", v: "0.15", u: "%" },
-    { l: "P-LCC", v: "42", u: "10⁹/L" },
-    { l: "P-LCR", v: "28.5", u: "%" }
-  ];
 
   return (
     <div className="relative z-20 min-h-screen py-20 md:py-32 px-6 md:px-12 lg:px-24">
@@ -94,28 +112,50 @@ const ProductSection: React.FC = () => {
       `}</style>
 
       <div className="max-w-7xl mx-auto">
-        <div className="mb-16 md:mb-24 max-w-4xl reveal">
-          <span className="text-blue-400 text-[10px] font-bold tracking-[0.4em] uppercase mb-4 md:mb-6 block">Current Product</span>
-          <img src="/clinomic-labs-logo.png" alt="Clinomic Labs" className="w-[200px] md:w-[350px] mb-6 md:mb-8 object-contain" />
-          <p className="text-white text-[16px] md:text-lg lg:text-xl font-light leading-relaxed italic mb-6 md:mb-8 border-l border-blue-400/50 pl-4 md:pl-6">
-            "A Clinical Intelligence Platform by Arogya BioX"
-          </p>
-          <div className="space-y-4 md:space-y-6 text-white font-light text-[16px] md:text-lg max-w-3xl">
-            <p>
-              Clinomic Labs is a laboratory-integrated clinical intelligence platform that enables Vitamin B12 deficiency risk screening using routine CBC data.
+        <div className="mb-16 md:mb-24 grid lg:grid-cols-2 gap-12 items-start reveal">
+          <div className="max-w-4xl">
+            <span className="text-blue-400 text-[10px] font-bold tracking-[0.4em] uppercase mb-4 md:mb-6 block">Current Product</span>
+            <img src="/clinomic-labs-logo.png" alt="Clinomic Labs" className="w-[200px] md:w-[350px] mb-6 md:mb-8 object-contain" />
+            <p className="text-white text-[16px] md:text-lg lg:text-xl font-light leading-relaxed italic mb-6 md:mb-8 border-l border-blue-400/50 pl-4 md:pl-6">
+              "A Clinical Intelligence Platform by Arogya BioX"
             </p>
-            <p>
-              It identifies hematological patterns associated with possible B12 insufficiency and presents a Low / Moderate / High risk flag, prompting timely clinical correlation and confirmatory testing.
+            <div className="space-y-4 md:space-y-6 text-white font-light text-[16px] md:text-lg max-w-3xl">
+              <p>
+                Clinomic Labs is a laboratory-integrated clinical intelligence platform that enables Vitamin B12 deficiency risk screening using routine CBC data.
+              </p>
+              <p>
+                It identifies hematological patterns associated with possible B12 insufficiency and presents a Low / Moderate / High risk flag, prompting timely clinical correlation and confirmatory testing.
+              </p>
+            </div>
+          </div>
+
+          <div className="glass-effect p-8 rounded-[32px] border border-white/10 hover:border-blue-400/20 hover:-translate-y-1 transition-all duration-500 mt-8 lg:mt-16">
+            <h4 className="text-blue-300 text-[12px] font-bold uppercase tracking-widest mb-4">How it interprets</h4>
+            <p className="text-[16px] md:text-sm text-white/80 font-light leading-relaxed mb-6">
+              Our engine doesn't just look for "high" or "low" numbers. It evaluates the <strong>morphological signature</strong> of blood cells across 21 standard parameters.
             </p>
+            <div className="space-y-3">
+              <div className="flex gap-3 items-center">
+                <div className="w-1.5 h-1.5 rounded-full bg-blue-400"></div>
+                <span className="text-[14px] md:text-[11px] text-white/90">Macro-ovalocytic trends in MCV & RBC indices</span>
+              </div>
+              <div className="flex gap-3 items-center">
+                <div className="w-1.5 h-1.5 rounded-full bg-blue-400"></div>
+                <span className="text-[14px] md:text-[11px] text-white/90">Subtle changes in anisocytosis (RDW-CV/SD)</span>
+              </div>
+              <div className="flex gap-3 items-center">
+                <div className="w-1.5 h-1.5 rounded-full bg-blue-400"></div>
+                <span className="text-[14px] md:text-[11px] text-white/90">Secondary signatures in WBC/Platelet distributions</span>
+              </div>
+            </div>
           </div>
         </div>
 
         {/* INTERACTIVE SIMULATOR */}
         <div className="mb-24 md:mb-40 reveal stagger-1">
-          <h3 className="text-blue-300 text-[10px] font-bold uppercase tracking-widest mb-10 text-center">Interactive Demo: Clinical Insight Engine</h3>
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="glass-effect p-8 rounded-[40px] border border-white/20 relative overflow-hidden group hover:border-blue-400/30 transition-all duration-500">
-              <div className="flex justify-between items-center mb-8">
+          <div className="w-full">
+            <div className="glass-effect p-8 md:p-12 rounded-[40px] border border-white/20 relative overflow-hidden group hover:border-blue-400/30 transition-all duration-500">
+              <div className="flex justify-between items-center mb-10">
                 <div className="text-[10px] uppercase tracking-widest font-bold text-white/60">Sample Patient #8492</div>
                 <div className="flex gap-2">
                   <div className="w-2 h-2 rounded-full bg-red-500/50"></div>
@@ -129,7 +169,7 @@ const ProductSection: React.FC = () => {
                   <div className="scan-line" style={{ top: `${scanProgress}%` }}></div>
                 )}
 
-                <div className="max-h-[360px] overflow-y-auto scrollbar-hide pr-2 space-y-1">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-2">
                   {patientData.map((row, idx) => (
                     <div key={idx} className="flex justify-between items-center py-2 border-b border-white/5 group-hover:border-white/10 transition-colors">
                       <span className="text-[10px] md:text-xs text-white/70 group-hover:text-white transition-colors uppercase tracking-wider">{row.l}</span>
@@ -146,7 +186,10 @@ const ProductSection: React.FC = () => {
                   <div className="reveal revealed">
                     <div className={`text-xl md:text-2xl font-bold tracking-tighter ${scanResult.color} mb-2`}>{scanResult.risk}</div>
                     <p className="text-xs text-white/80 font-light leading-relaxed">{scanResult.details}</p>
-                    <button onClick={() => setScanResult(null)} className="mt-6 text-[9px] uppercase tracking-widest font-bold text-white/40 hover:text-white transition-colors underline">Reset Scanner</button>
+                    <button onClick={() => {
+                      setScanResult(null);
+                      setPatientData(generateRandomData());
+                    }} className="mt-6 text-[9px] uppercase tracking-widest font-bold text-white/40 hover:text-white transition-colors underline">Reset Scanner</button>
                   </div>
                 ) : (
                   <button
@@ -157,34 +200,13 @@ const ProductSection: React.FC = () => {
                     {isScanning ? `Analyzing Pattern... ${Math.round(scanProgress)}%` : "Start Clinical Scan"}
                   </button>
                 )}
+                <p className="text-[10px] text-white/60 italic text-center mt-8">
+                  *This simulation demonstrates the logic behind the Clinomic Labs risk stratification engine using all 21 hematological variables.
+                </p>
               </div>
             </div>
 
-            <div className="space-y-8 reveal stagger-2">
-              <div className="glass-effect p-8 rounded-[32px] border border-white/10 hover:border-blue-400/20 hover:-translate-y-1 transition-all duration-500">
-                <h4 className="text-blue-300 text-[12px] font-bold uppercase tracking-widest mb-4">How it interprets</h4>
-                <p className="text-[16px] md:text-sm text-white/80 font-light leading-relaxed mb-6">
-                  Our engine doesn't just look for "high" or "low" numbers. It evaluates the <strong>morphological signature</strong> of blood cells across 21 standard parameters.
-                </p>
-                <div className="space-y-3">
-                  <div className="flex gap-3 items-center">
-                    <div className="w-1.5 h-1.5 rounded-full bg-blue-400"></div>
-                    <span className="text-[14px] md:text-[11px] text-white/90">Macro-ovalocytic trends in MCV & RBC indices</span>
-                  </div>
-                  <div className="flex gap-3 items-center">
-                    <div className="w-1.5 h-1.5 rounded-full bg-blue-400"></div>
-                    <span className="text-[14px] md:text-[11px] text-white/90">Subtle changes in anisocytosis (RDW-CV/SD)</span>
-                  </div>
-                  <div className="flex gap-3 items-center">
-                    <div className="w-1.5 h-1.5 rounded-full bg-blue-400"></div>
-                    <span className="text-[14px] md:text-[11px] text-white/90">Secondary signatures in WBC/Platelet distributions</span>
-                  </div>
-                </div>
-              </div>
-              <p className="text-xs text-white/40 italic text-center md:text-left px-4">
-                *This simulation demonstrates the logic behind the Clinomic Labs risk stratification engine using all 21 hematological variables.
-              </p>
-            </div>
+
           </div>
         </div>
 
