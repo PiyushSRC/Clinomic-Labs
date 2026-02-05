@@ -4,7 +4,8 @@ const Navbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 
   const scrollTo = (id: string) => {
-    if (window.location.pathname.includes('demo.html')) {
+    const isDemoPage = window.location.pathname.includes('/demo');
+    if (isDemoPage) {
       window.location.href = `/#${id}`;
       return;
     }
@@ -21,7 +22,8 @@ const Navbar: React.FC = () => {
         {/* Logo */}
         <button
           onClick={() => {
-            if (window.location.pathname.includes('demo.html')) {
+            const isDemoPage = window.location.pathname.includes('/demo');
+            if (isDemoPage) {
               window.location.href = '/';
             } else {
               scrollTo('hero');

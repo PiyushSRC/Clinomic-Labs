@@ -56,19 +56,16 @@ const CompanyBackground: React.FC = () => {
             </div>
 
             {/* Stats Grid */}
-            <div className="grid grid-cols-3 gap-8 px-4">
-              <div className="flex flex-col gap-2">
-                <div className="text-h2 md:text-h1 font-light text-white font-heading tracking-tight">CDSS</div>
-                <div className="text-small-label md:text-label-2 text-white/50 font-bold uppercase tracking-[0.2em] font-heading">PLATFORM</div>
-              </div>
-              <div className="flex flex-col gap-2">
-                <div className="text-h2 md:text-h1 font-light text-blue-400 font-heading tracking-tight">B12</div>
-                <div className="text-small-label md:text-label-2 text-white/50 font-bold uppercase tracking-[0.2em] font-heading">PRIMARY</div>
-              </div>
-              <div className="flex flex-col gap-2">
-                <div className="text-body-1 lg:text-h3 font-bold text-white font-heading tracking-tight leading-none pt-1">Preventive Health</div>
-                <div className="text-small-label text-white/50 font-bold uppercase tracking-[0.1em] font-heading">(UPCOMING)</div>
-              </div>
+            <div className="grid grid-cols-3 gap-x-8 gap-y-2 px-4">
+              {/* Row 1: Titles */}
+              <div className="text-h2 md:text-h1 font-light text-white font-heading tracking-tight text-center">CDSS</div>
+              <div className="text-h2 md:text-h1 font-light text-blue-400 font-heading tracking-tight text-center">B12</div>
+              <div className="text-body-1 lg:text-h3 font-bold text-white font-heading tracking-tight leading-none self-center text-center">Preventive Health</div>
+
+              {/* Row 2: Status Labels */}
+              <div className="text-small-label md:text-label-2 text-white/50 font-bold uppercase tracking-[0.2em] font-heading text-center">PLATFORM</div>
+              <div className="text-small-label md:text-label-2 text-white/50 font-bold uppercase tracking-[0.2em] font-heading text-center">PRIMARY</div>
+              <div className="text-small-label md:text-label-2 text-white/50 font-bold uppercase tracking-[0.2em] font-heading text-center">(UPCOMING)</div>
             </div>
 
             <p className="italic text-blue-300/60 text-small-label md:text-label-2 font-medium text-center font-body mt-4">

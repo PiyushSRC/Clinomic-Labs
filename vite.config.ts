@@ -24,6 +24,14 @@ export default defineConfig(({ mode }) => ({
     outDir: 'dist',
     minify: 'esbuild',
     rollupOptions: {
+      input: {
+        main: 'index.html',
+        demo: 'demo.html',
+        disclaimer: 'disclaimer.html',
+        dpdp: 'dpdp-act.html',
+        privacy: 'privacy-policy.html',
+        terms: 'terms-conditions.html',
+      },
       output: {
         manualChunks: {
           'react-vendor': ['react', 'react-dom'],

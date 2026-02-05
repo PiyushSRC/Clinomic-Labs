@@ -8,10 +8,10 @@ const Footer: React.FC = () => {
                 <span>&copy; 2026 Arogya BioX. All rights reserved.</span>
 
                 {[
-                    { name: 'Privacy Policy', href: '/privacy-policy.html' },
-                    { name: 'Terms & Conditions', href: '/terms-conditions.html' },
-                    { name: 'Medical Disclaimer', href: '/disclaimer.html' },
-                    { name: 'DPDP Act', href: '/dpdp-act.html' }
+                    { name: 'Privacy Policy', href: '/privacy-policy' },
+                    { name: 'Terms & Conditions', href: '/terms-conditions' },
+                    { name: 'Medical Disclaimer', href: '/disclaimer' },
+                    { name: 'DPDP Act', href: '/dpdp-act' }
                 ].map((link) => (
                     <React.Fragment key={link.name}>
                         <span className="hidden md:inline text-white/20">|</span>
