@@ -112,14 +112,23 @@ const ProductSection: React.FC = () => {
       `}</style>
 
       <div className="max-w-7xl mx-auto">
-        <div className="mb-24 grid lg:grid-cols-2 gap-12">
-          <div className="max-w-3xl">
-            <span className="text-blue-400 text-xs font-bold tracking-[0.4em] uppercase mb-6 block font-heading">Current Product</span>
-            <img src="/clinomic-labs-logo.png" alt="Clinomic Labs" className="w-[200px] md:w-[320px] mb-8 object-contain" />
-            <p className="text-white text-lg lg:text-xl font-light leading-relaxed italic mb-8 border-l border-blue-400/50 pl-6 font-body">
-              "A Clinical Intelligence Platform by Arogya BioX"
-            </p>
-            <div className="space-y-6 text-white font-light text-base md:text-lg max-w-2xl font-body">
+        <div className="mb-24 grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+          {/* Left Column */}
+          <div className="text-left">
+            <span className="text-blue-400 text-small-label md:text-label-2 font-bold tracking-[0.4em] uppercase mb-8 block font-heading">CURRENT PRODUCT</span>
+            <img
+              src="/clinomic-labs-logo.png"
+              alt="Clinomic Labs"
+              className="h-[32px] md:h-[42px] w-auto mb-10 object-contain"
+            />
+
+            <div className="border-l-2 border-blue-400/50 pl-6 mb-10">
+              <p className="text-white text-body-1 lg:text-h3 font-light leading-relaxed italic font-body">
+                "A Clinical Intelligence Platform by Arogya BioX"
+              </p>
+            </div>
+
+            <div className="space-y-8 text-white/80 text-body-2 md:text-body-1 font-light leading-relaxed max-w-xl font-body">
               <p>
                 Clinomic Labs is a laboratory-integrated clinical intelligence platform that enables Vitamin B12 deficiency risk screening using routine CBC data.
               </p>
@@ -129,24 +138,27 @@ const ProductSection: React.FC = () => {
             </div>
           </div>
 
-          <div className="glass-effect p-10 rounded-[40px] border border-white/10 hover:border-blue-400/30 hover:bg-white/[0.04] hover:-translate-y-1 transition-all duration-500 mt-8 lg:mt-0 h-full flex flex-col justify-center">
-            <h4 className="text-blue-300 text-xs font-bold uppercase tracking-widest mb-6 font-heading">How it interprets</h4>
-            <p className="text-xl text-white/80 font-light leading-relaxed mb-8 font-body">
-              Our engine doesn't just look for "high" or "low" numbers. It evaluates the <strong>morphological signature</strong> of blood cells across 21 standard parameters.
-            </p>
-            <div className="space-y-4">
-              <div className="flex gap-4 items-center">
-                <div className="w-1.5 h-1.5 rounded-full bg-blue-400 shrink-0"></div>
-                <span className="text-xl text-white/90 font-body">Macro-ovalocytic trends in MCV & RBC indices</span>
-              </div>
-              <div className="flex gap-4 items-center">
-                <div className="w-1.5 h-1.5 rounded-full bg-blue-400 shrink-0"></div>
-                <span className="text-xl text-white/90 font-body">Subtle changes in anisocytosis (RDW-CV/SD)</span>
-              </div>
-              <div className="flex gap-4 items-center">
-                <div className="w-1.5 h-1.5 rounded-full bg-blue-400 shrink-0"></div>
-                <span className="text-xl text-white/90 font-body">Secondary signatures in WBC/Platelet distributions</span>
-              </div>
+          {/* Right Column */}
+          <div className="mt-12 lg:mt-0">
+            <div className="glass-effect p-12 rounded-[40px] border border-white/10 hover:border-blue-400/30 hover:bg-white/[0.04] transition-all duration-500 group">
+              <h3 className="text-blue-300 text-small-label md:text-label-2 font-bold uppercase tracking-widest mb-10 font-heading">HOW IT INTERPRETS</h3>
+              <p className="text-white/90 text-body-2 md:text-body-1 font-light leading-relaxed mb-10 font-body">
+                Our engine doesn't just look for "high" or "low" numbers. It evaluates the <strong>morphological signature</strong> of blood cells across 21 standard parameters.
+              </p>
+              <ul className="space-y-6">
+                {[
+                  { bold: "Macro-ovalocytic trends", rest: "in MCV & RBC indices" },
+                  { bold: "Subtle changes", rest: "in anisocytosis (RDW-CV/SD)" },
+                  { bold: "Secondary signatures", rest: "in WBC/Platelet distributions" }
+                ].map((item, idx) => (
+                  <li key={idx} className="flex items-start gap-4 group/item">
+                    <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.6)] shrink-0 mt-1.5"></div>
+                    <span className="text-body-2 md:text-body-1 text-white/90 font-light font-body">
+                      <strong className="font-bold text-white/100">{item.bold}</strong> {item.rest}
+                    </span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
@@ -248,7 +260,7 @@ const ProductSection: React.FC = () => {
         </div>
 
         <div className="relative mb-32 reveal">
-          <h3 className="text-center text-white/60 text-xs font-bold uppercase tracking-[0.4em] mb-16 font-heading">How Clinomic Labs Works</h3>
+          <h3 className="text-center text-white/60 text-small-label font-bold uppercase tracking-[0.4em] mb-16 font-heading">How Clinomic Labs Works</h3>
 
           <div className="relative max-w-6xl mx-auto">
             <div className="absolute top-[24px] lg:top-[28px] left-[10%] right-[10%] h-px hidden md:block pointer-events-none">
@@ -289,30 +301,31 @@ const ProductSection: React.FC = () => {
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto border-t border-white/10 pt-24">
+        <div className="max-w-7xl mx-auto border-t border-white/10 pt-24 text-center">
+          <div className="max-w-4xl mx-auto mb-16">
+            <span className="text-blue-300 text-small-label font-bold tracking-[0.4em] uppercase mb-8 block font-heading">Future Roadmap</span>
+            <h2 className="text-h2 md:text-h1 mb-10 leading-[1.1] font-heading">
+              <span className="font-bold text-white">Preventive Health</span> <br />
+              <span className="text-h3 md:text-h2 font-light text-blue-400/80 uppercase tracking-widest block mt-4">(Upcoming)</span>
+            </h2>
+            <p className="text-white text-body-1 font-light leading-relaxed font-body max-w-2xl mx-auto mb-12">
+              We are expanding the Clinomic intelligence engine to address critical gaps in preventive screening. By leveraging existing diagnostic panels, we aim to identify health risks earlier and more accurately.
+            </p>
+          </div>
+
           <div className="grid lg:grid-cols-2 gap-16">
             <div className="reveal-left">
-              <span className="text-blue-300 text-xs font-bold tracking-[0.4em] uppercase mb-8 block font-heading">Future Roadmap</span>
-              <h2 className="text-5xl md:text-6xl mb-10 leading-[1.1] font-heading">
-                <span className="font-bold text-white">Preventive Health</span> <br />
-                <span className="text-2xl md:text-3xl font-light text-blue-400/80 uppercase tracking-widest block mt-4">(Upcoming)</span>
-              </h2>
-              <div className="space-y-8">
-                <p className="text-white text-lg font-light leading-relaxed font-body">
-                  We are expanding the Clinomic intelligence engine to address critical gaps in preventive screening. By leveraging existing diagnostic panels, we aim to identify health risks earlier and more accurately.
-                </p>
-                <div className="flex flex-col gap-4">
-                  {[
-                    { t: "Iron Deficiency & Anemia Patterns", d: "Early detection of latent iron deficiency before symptomatic presentation." },
-                    { t: "Metabolic & Chronic Risk", d: "Screening for indicators of metabolic syndrome and long-term wellness gaps." },
-                    { t: "Hormonal Health Signals", d: "Extracting subtle clinical markers from routine hematology and chemistry labs." }
-                  ].map((item, idx) => (
-                    <div key={idx} className="glass-effect p-6 rounded-[40px] border border-white/20 hover:border-blue-400/40 hover:-translate-x-1 transition-all duration-500 group">
-                      <div className="text-sm font-bold text-blue-300 uppercase tracking-widest mb-1 group-hover:text-blue-400 transition-colors font-heading">{item.t}</div>
-                      <p className="text-xs text-white/80 font-light group-hover:text-white transition-colors font-body">{item.d}</p>
-                    </div>
-                  ))}
-                </div>
+              <div className="flex flex-col gap-4">
+                {[
+                  { t: "Iron Deficiency & Anemia Patterns", d: "Early detection of latent iron deficiency before symptomatic presentation." },
+                  { t: "Metabolic & Chronic Risk", d: "Screening for indicators of metabolic syndrome and long-term wellness gaps." },
+                  { t: "Hormonal Health Signals", d: "Extracting subtle clinical markers from routine hematology and chemistry labs." }
+                ].map((item, idx) => (
+                  <div key={idx} className="glass-effect p-6 rounded-[40px] border border-white/20 hover:border-blue-400/40 hover:-translate-x-1 transition-all duration-500 group text-left">
+                    <div className="text-label-1 font-bold text-blue-300 uppercase tracking-widest mb-1 group-hover:text-blue-400 transition-colors font-heading">{item.t}</div>
+                    <p className="text-body-2 text-white/80 font-light group-hover:text-white transition-colors font-body">{item.d}</p>
+                  </div>
+                ))}
               </div>
             </div>
 
@@ -320,23 +333,23 @@ const ProductSection: React.FC = () => {
               <div className="glass-effect h-full min-h-[480px] rounded-[40px] border border-white/10 p-12 flex flex-col justify-center relative overflow-hidden group hover:border-blue-400/30 hover:bg-white/[0.04] transition-all duration-700">
                 <div className="absolute top-[-20%] right-[-20%] w-[60%] h-[60%] bg-blue-500/10 blur-[100px] rounded-full group-hover:bg-blue-400/20 transition-all duration-1000"></div>
 
-                <h3 className="text-3xl font-light mb-8 text-center group-hover:text-white transition-colors font-heading">Screening at the <span className="font-medium">Point of Routine</span></h3>
-                <p className="text-white/80 text-sm font-light text-center leading-relaxed mb-12 group-hover:text-white transition-colors font-body">
+                <h3 className="text-h1 font-light mb-8 text-center group-hover:text-white transition-colors font-heading">Screening at the <span className="font-medium">Point of Routine</span></h3>
+                <p className="text-white/80 text-body-2 font-light text-center leading-relaxed mb-12 group-hover:text-white transition-colors font-body">
                   Our roadmap focuses on closing the screening gap globally by making preventive health insights a standard part of every annual lab visit.
                 </p>
 
-                <div className="space-y-4">
+                <div className="space-y-4 max-w-sm mx-auto w-full">
                   <div className="flex justify-between items-center py-3 border-b border-white/10 group-hover:border-white/20 transition-colors">
-                    <span className="text-xs uppercase tracking-widest font-bold text-white/70 font-heading">Phase</span>
-                    <span className="text-sm text-blue-300 font-medium font-body">Research & Development</span>
+                    <span className="text-small-label uppercase tracking-widest font-bold text-white/70 font-heading">Phase</span>
+                    <span className="text-body-2 text-blue-300 font-medium font-body">Research & Development</span>
                   </div>
                   <div className="flex justify-between items-center py-3 border-b border-white/10 group-hover:border-white/20 transition-colors">
-                    <span className="text-xs uppercase tracking-widest font-bold text-white/70 font-heading">Primary Marker</span>
-                    <span className="text-sm text-white font-body">Ferritin & CBC Composite</span>
+                    <span className="text-small-label uppercase tracking-widest font-bold text-white/70 font-heading">Primary Marker</span>
+                    <span className="text-body-2 text-white font-body">Ferritin & CBC Composite</span>
                   </div>
                   <div className="flex justify-between items-center py-3 group-hover:border-white/20 transition-colors">
-                    <span className="text-xs uppercase tracking-widest font-bold text-white/70 font-heading">Integration</span>
-                    <span className="text-sm text-white font-body">Standard Multi-Analyzer</span>
+                    <span className="text-small-label uppercase tracking-widest font-bold text-white/70 font-heading">Integration</span>
+                    <span className="text-body-2 text-white font-body">Standard Multi-Analyzer</span>
                   </div>
                 </div>
 
@@ -352,11 +365,11 @@ const ProductSection: React.FC = () => {
             {/* Box 1 */}
             <div className="glass-effect p-8 md:p-12 rounded-[40px] border border-white/10 flex flex-col justify-between hover:-translate-y-2 hover:border-blue-400/30 hover:bg-white/[0.04] transition-all duration-500 group reveal-left">
               <div>
-                <span className="text-blue-300 text-xs font-bold tracking-[0.4em] uppercase mb-6 block font-heading">Lab Intelligence</span>
-                <h3 className="text-3xl md:text-4xl font-light mb-8 transition-colors group-hover:text-blue-100 font-heading">
+                <span className="text-blue-300 text-small-label font-bold tracking-[0.4em] uppercase mb-6 block font-heading">Lab Intelligence</span>
+                <h3 className="text-h1 font-light mb-8 transition-colors group-hover:text-blue-100 font-heading">
                   How Clinomic Labs Helps <span className="font-medium text-white">Laboratories</span>
                 </h3>
-                <p className="text-white text-base md:text-lg mb-10 leading-relaxed font-light opacity-90 group-hover:opacity-100 transition-opacity font-body">
+                <p className="text-white text-body-1 mb-10 leading-relaxed font-light opacity-90 group-hover:opacity-100 transition-opacity font-body">
                   Turn Routine CBCs into a Value-Added Screening Service. Extract additional clinical insight from tests you already perform—without changing workflows, equipment, or sample collection.
                 </p>
                 <ul className="space-y-6 mb-10">
@@ -367,25 +380,25 @@ const ProductSection: React.FC = () => {
                     { t: "Scales with lab volume", d: "Designed for high-throughput environments." }
                   ].map((item, idx) => (
                     <li key={idx} className="group/item">
-                      <div className="text-base font-medium text-blue-200 mb-1 group-hover/item:text-blue-300 transition-colors font-heading">{item.t}</div>
-                      <div className="text-sm text-white/80 font-light leading-relaxed group-hover/item:text-white transition-colors font-body">{item.d}</div>
+                      <div className="text-label-1 font-medium text-blue-200 mb-1 group-hover/item:text-blue-300 transition-colors font-heading">{item.t}</div>
+                      <div className="text-body-2 text-white/80 font-light leading-relaxed group-hover/item:text-white transition-colors font-body">{item.d}</div>
                     </li>
                   ))}
                 </ul>
               </div>
               <div className="pt-8 border-t border-white/10">
-                <p className="text-xs text-blue-400 font-bold uppercase tracking-widest italic font-body">Move from test providers to preventive screening partners.</p>
+                <p className="text-small-label text-blue-400 font-bold uppercase tracking-widest italic font-body">Move from test providers to preventive screening partners.</p>
               </div>
             </div>
 
             {/* Box 2 */}
             <div className="glass-effect p-8 md:p-12 rounded-[40px] border border-white/10 flex flex-col justify-between hover:-translate-y-2 hover:border-blue-400/30 hover:bg-white/[0.04] transition-all duration-500 group reveal-right">
               <div>
-                <span className="text-blue-300 text-xs font-bold tracking-[0.4em] uppercase mb-6 block font-heading">Patient Care</span>
-                <h3 className="text-3xl md:text-4xl font-light mb-8 transition-colors group-hover:text-blue-100 font-heading">
+                <span className="text-blue-300 text-small-label font-bold tracking-[0.4em] uppercase mb-6 block font-heading">Patient Care</span>
+                <h3 className="text-h1 font-light mb-8 transition-colors group-hover:text-blue-100 font-heading">
                   How Clinomic Labs Helps <span className="font-medium text-white">Patients</span>
                 </h3>
-                <p className="text-white text-base md:text-lg mb-10 leading-relaxed font-light opacity-90 group-hover:opacity-100 transition-opacity font-body">
+                <p className="text-white text-body-1 mb-10 leading-relaxed font-light opacity-90 group-hover:opacity-100 transition-opacity font-body">
                   Earlier Awareness Without Additional Tests. Many patients with Vitamin B12 deficiency remain undiagnosed until symptoms become severe.
                 </p>
                 <ul className="space-y-6 mb-10">
@@ -396,14 +409,14 @@ const ProductSection: React.FC = () => {
                     { t: "Clear, simple results", d: "Risk categories presented in non-alarming language." }
                   ].map((item, idx) => (
                     <li key={idx} className="group/item">
-                      <div className="text-base font-medium text-blue-200 mb-1 group-hover/item:text-blue-300 transition-colors font-heading">{item.t}</div>
-                      <div className="text-sm text-white/80 font-light leading-relaxed group-hover/item:text-white transition-colors font-body">{item.d}</div>
+                      <div className="text-label-1 font-medium text-blue-200 mb-1 group-hover/item:text-blue-300 transition-colors font-heading">{item.t}</div>
+                      <div className="text-body-2 text-white/80 font-light leading-relaxed group-hover/item:text-white transition-colors font-body">{item.d}</div>
                     </li>
                   ))}
                 </ul>
               </div>
               <div className="pt-8 border-t border-white/10">
-                <p className="text-xs text-blue-400 font-bold uppercase tracking-widest italic font-body">Supports informed conversations—earlier and more effectively.</p>
+                <p className="text-small-label text-blue-400 font-bold uppercase tracking-widest italic font-body">Supports informed conversations—earlier and more effectively.</p>
               </div>
             </div>
           </div>

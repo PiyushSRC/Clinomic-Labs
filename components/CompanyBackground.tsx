@@ -7,28 +7,40 @@ const CompanyBackground: React.FC = () => {
   };
 
   return (
-    <div className="relative z-20 py-8 md:py-24 px-6 md:px-12 lg:px-24 flex flex-col justify-center">
+    <div className="relative z-20 py-12 md:py-32 px-6 md:px-12 lg:px-24">
       <div className="max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-start">
-          <div>
-            <span className="text-blue-300 text-xs font-bold tracking-[0.4em] uppercase mb-6 block font-heading">ABOUT US</span>
-            <img src="/arogya-logo-full.png" alt="Arogya BioX" className="h-[34px] md:h-[52px] lg:h-[64px] w-auto mb-10 object-contain" />
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-light mb-12 leading-tight tracking-tight font-heading">
-              Transforming <span className="text-white font-medium italic whitespace-nowrap">Routine Tests</span> into Screening Tools.
-            </h2>
-            <p className="text-white text-lg lg:text-xl font-light leading-relaxed mb-8 font-body">
-              We specialize in converting widely performed laboratory investigations into scalable screening tools.
-            </p>
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+          {/* Left Column */}
+          <div className="text-left">
+            <span className="text-blue-400 text-small-label md:text-label-2 font-bold tracking-[0.4em] uppercase mb-8 block font-heading">ABOUT US</span>
+            <img
+              src="/arogya-logo-full.png"
+              alt="Arogya BioX"
+              className="h-[32px] md:h-[42px] w-auto mb-12 object-contain"
+            />
 
-            <div className="space-y-6 text-white text-base font-light leading-relaxed font-body">
-              <p>Our platforms help laboratories, clinicians, and health systems identify risk earlier, at population scale, by working on top of existing lab workflows requiring no new equipment, no additional reagents, and no change in sample collection.</p>
+            <h2 className="text-display-2 md:text-display-1 font-light mb-12 leading-[1.1] tracking-tight text-white font-heading">
+              Transforming <br />
+              <span className="font-medium italic text-white/90">Routine Tests</span> <br />
+              into Screening Tools.
+            </h2>
+
+            <div className="space-y-8 text-white/80 text-body-1 lg:text-h3 font-light leading-relaxed max-w-xl font-body">
+              <p>
+                We specialize in converting widely performed laboratory investigations into scalable screening tools.
+              </p>
+              <p>
+                Our platforms help laboratories, clinicians, and health systems identify risk earlier, at population scale, by working on top of existing lab workflows requiring no new equipment, no additional reagents, and no change in sample collection.
+              </p>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 gap-12">
-            <div className="glass-effect p-10 rounded-[40px] border border-white/10 hover:border-blue-400/30 hover:-translate-y-1 hover:bg-white/[0.04] transition-all duration-500 group">
-              <h3 className="text-blue-300 text-xs font-bold uppercase tracking-widest mb-8 group-hover:text-blue-400 transition-colors font-heading">Our Approach</h3>
-              <ul className="space-y-5">
+          {/* Right Column */}
+          <div className="flex flex-col gap-12 mt-12 lg:mt-0">
+            {/* Our Approach Card */}
+            <div className="glass-effect p-12 rounded-[40px] border border-white/10 hover:border-blue-400/30 hover:bg-white/[0.04] transition-all duration-500 group">
+              <h3 className="text-blue-300 text-small-label md:text-label-2 font-bold uppercase tracking-widest mb-10 font-heading">OUR APPROACH</h3>
+              <ul className="space-y-6">
                 {[
                   "Evidence-based clinical design",
                   "Transparent, interpretable outputs",
@@ -36,35 +48,32 @@ const CompanyBackground: React.FC = () => {
                   "Built for high-volume, real-world deployment"
                 ].map((item, idx) => (
                   <li key={idx} className="flex items-center gap-4 group/item">
-                    <div className="w-1.5 h-1.5 rounded-full bg-blue-400 shadow-[0_0_8px_rgba(96,165,250,0.6)] shrink-0 group-hover/item:scale-125 transition-transform"></div>
-                    <span className="text-base text-white font-light group-hover/item:text-blue-50 transition-colors font-body">{item}</span>
+                    <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.6)] shrink-0"></div>
+                    <span className="text-body-2 md:text-body-1 text-white/90 font-light font-body">{item}</span>
                   </li>
                 ))}
               </ul>
             </div>
 
-            <div className="grid grid-cols-3 gap-8">
-              <div className="text-left group hover:scale-105 transition-transform duration-300 h-full flex flex-col justify-between">
-                <div className="text-3xl font-light text-white mb-2 font-heading">CDSS</div>
-                <div className="text-xs text-white/80 uppercase tracking-widest font-bold group-hover:text-blue-300 transition-colors font-heading">Platform</div>
+            {/* Stats Grid */}
+            <div className="grid grid-cols-3 gap-8 px-4">
+              <div className="flex flex-col gap-2">
+                <div className="text-h2 md:text-h1 font-light text-white font-heading tracking-tight">CDSS</div>
+                <div className="text-small-label md:text-label-2 text-white/50 font-bold uppercase tracking-[0.2em] font-heading">PLATFORM</div>
               </div>
-              <div
-                onClick={() => scrollTo('contact')}
-                className="text-center cursor-pointer group hover:scale-105 transition-transform duration-300 h-full flex flex-col items-center justify-between"
-              >
-                <div className="text-3xl font-light text-blue-400 mb-2 group-hover:text-white transition-colors font-heading">B12</div>
-                <div className="text-xs text-white/80 uppercase tracking-widest font-bold group-hover:text-blue-400 font-heading">Primary</div>
+              <div className="flex flex-col gap-2">
+                <div className="text-h2 md:text-h1 font-light text-blue-400 font-heading tracking-tight">B12</div>
+                <div className="text-small-label md:text-label-2 text-white/50 font-bold uppercase tracking-[0.2em] font-heading">PRIMARY</div>
               </div>
-              <div className="text-right group hover:scale-105 transition-transform duration-300 origin-right h-full flex flex-col items-end justify-between">
-                <div className="text-xl font-bold text-white mb-2 leading-tight font-heading">
-                  Preventive Health
-                </div>
-                <div className="text-xs text-white/80 uppercase tracking-widest font-bold group-hover:text-blue-400 transition-colors font-heading">
-                  (Upcoming)
-                </div>
+              <div className="flex flex-col gap-2">
+                <div className="text-body-1 lg:text-h3 font-bold text-white font-heading tracking-tight leading-none pt-1">Preventive Health</div>
+                <div className="text-small-label text-white/50 font-bold uppercase tracking-[0.1em] font-heading">(UPCOMING)</div>
               </div>
             </div>
-            <p className="italic text-blue-300 text-xs font-medium text-center opacity-80 mt-[-10px] font-body">"We design every product as a clinical decision support system, not a diagnostic replacement."</p>
+
+            <p className="italic text-blue-300/60 text-small-label md:text-label-2 font-medium text-center font-body mt-4">
+              "We design every product as a clinical decision support system, not a diagnostic replacement."
+            </p>
           </div>
         </div>
       </div>

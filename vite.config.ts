@@ -1,8 +1,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-import { resolve } from 'path';
-
 export default defineConfig(({ mode }) => ({
   plugins: [react()],
   define: {
@@ -26,14 +24,6 @@ export default defineConfig(({ mode }) => ({
     outDir: 'dist',
     minify: 'esbuild',
     rollupOptions: {
-      input: {
-        main: resolve(__dirname, 'index.html'),
-        demo: resolve(__dirname, 'demo.html'),
-        privacy: resolve(__dirname, 'privacy-policy.html'),
-        terms: resolve(__dirname, 'terms-conditions.html'),
-        disclaimer: resolve(__dirname, 'disclaimer.html'),
-        dpdp: resolve(__dirname, 'dpdp-act.html'),
-      },
       output: {
         manualChunks: {
           'react-vendor': ['react', 'react-dom'],
