@@ -70,25 +70,25 @@ const App: React.FC = () => {
           <Hero onToggleMode={toggleMode} />
         </section>
 
-        <section id="company" className="relative md:border-t md:border-white/10 reveal scroll-mt-20 md:scroll-mt-24">
+        <section id="company" className="relative md:border-t md:border-white/10 scroll-mt-20 md:scroll-mt-24">
           <CompanyBackground />
         </section>
 
-        <section id="solution" className="relative md:border-t md:border-white/10 reveal scroll-mt-20 md:scroll-mt-24">
+        <section id="solution" className="relative md:border-t md:border-white/10 scroll-mt-20 md:scroll-mt-24">
           <ProductSection />
         </section>
 
 
 
-        <section id="value" className="relative md:border-t md:border-white/10 reveal scroll-mt-20 md:scroll-mt-24">
+        <section id="value" className="relative md:border-t md:border-white/10 scroll-mt-20 md:scroll-mt-24">
           <ValuePropSection />
         </section>
 
-        <section id="pricing" className="relative md:border-t md:border-white/10 reveal scroll-mt-20 md:scroll-mt-24">
+        <section id="pricing" className="relative md:border-t md:border-white/10 scroll-mt-20 md:scroll-mt-24">
           <PricingSection />
         </section>
 
-        <section id="contact" className="relative md:border-t md:border-white/10 reveal scroll-mt-20 md:scroll-mt-24">
+        <section id="contact" className="relative md:border-t md:border-white/10 scroll-mt-20 md:scroll-mt-24">
           <ContactSection />
         </section>
       </main>

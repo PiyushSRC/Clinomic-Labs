@@ -112,7 +112,7 @@ const ProductSection: React.FC = () => {
       `}</style>
 
       <div className="max-w-7xl mx-auto">
-        <div className="mb-24 grid lg:grid-cols-2 gap-12 reveal">
+        <div className="mb-24 grid lg:grid-cols-2 gap-12">
           <div className="max-w-3xl">
             <span className="text-blue-400 text-xs font-bold tracking-[0.4em] uppercase mb-6 block font-heading">Current Product</span>
             <img src="/clinomic-labs-logo.png" alt="Clinomic Labs" className="w-[200px] md:w-[320px] mb-8 object-contain" />
