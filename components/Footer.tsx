@@ -9,21 +9,19 @@ const Footer: React.FC = () => {
                     &copy; 2026 Arogya BioX. All rights reserved.
                 </div>
 
-                <div className="flex flex-wrap justify-center items-center gap-x-2 md:gap-x-4 gap-y-2 text-[10px] md:text-xs font-medium text-white/60 uppercase tracking-widest font-heading">
-                    {[
-                        { name: 'Privacy Policy', href: '/privacy-policy' },
-                        { name: 'Terms & Conditions', href: '/terms-conditions' },
-                        { name: 'Medical Disclaimer', href: '/disclaimer' },
-                        { name: 'DPDP Act', href: '/dpdp-act' }
-                    ].map((link, index) => (
-                        <React.Fragment key={link.name}>
-                            {index > 0 && <span className="text-white/20">|</span>}
-                            <a href={link.href} className="hover:text-blue-300 transition-colors">
-                                {link.name}
-                            </a>
-                        </React.Fragment>
-                    ))}
-                </div>
+                {[
+                    { name: 'Privacy Policy', href: '/privacy-policy.html' },
+                    { name: 'Terms & Conditions', href: '/terms-conditions.html' },
+                    { name: 'Medical Disclaimer', href: '/disclaimer.html' },
+                    { name: 'DPDP Act', href: '/dpdp-act.html' }
+                ].map((link) => (
+                    <React.Fragment key={link.name}>
+                        <span className="hidden md:inline text-white/20">|</span>
+                        <a href={link.href} className="hover:text-blue-300 transition-colors uppercase">
+                            {link.name}
+                        </a>
+                    </React.Fragment>
+                ))}
             </div>
         </div>
     );

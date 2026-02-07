@@ -34,8 +34,8 @@ const Hero: React.FC<HeroProps> = ({ onToggleMode }) => {
 
           <div className="flex flex-col sm:flex-row sm:flex-wrap gap-6 w-full sm:w-auto">
             <button
-              onClick={() => window.location.href = '/demo'}
-              className="min-h-12 px-8 py-4 bg-blue-500 hover:bg-blue-600 text-white rounded-full text-cta-md font-bold tracking-widest uppercase transition-all shadow-lg hover:shadow-blue-500/50 hover:scale-105 active:scale-95 text-center min-w-[12rem] font-heading"
+              onClick={() => window.location.href = '/demo.html'}
+              className="px-8 py-4 bg-blue-500 hover:bg-blue-600 text-white rounded-full text-cta-md font-bold tracking-widest uppercase transition-all shadow-lg hover:shadow-blue-500/50 hover:scale-105 active:scale-95 text-center min-w-[200px] font-heading"
             >
               Request a Demo
             </button>
