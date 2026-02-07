@@ -88,7 +88,7 @@ const App: React.FC = () => {
           <PricingSection />
         </section>
 
-        <section id="contact" className="relative md:border-t md:border-white/10 scroll-mt-20 md:scroll-mt-24">
+        <section id="contact" className="relative md:border-t md:border-white/10 scroll-mt-28 md:scroll-mt-32">
           <ContactSection />
         </section>
       </main>
