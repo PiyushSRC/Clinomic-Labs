@@ -1,8 +1,7 @@
 {
-  "cleanUrls": true,
   "rewrites": [
     {
-      "source": "/((?!api/|demo|privacy-policy|terms-conditions|disclaimer|dpdp-act).*)",
+      "source": "/((?!api/.*).*)",
       "destination": "/index.html"
     }
   ],

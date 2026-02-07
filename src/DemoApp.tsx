@@ -108,12 +108,12 @@ const DemoApp: React.FC = () => {
                     {/* Left Side: Info Section */}
                     <div className="h-full flex flex-col justify-center items-center text-center pr-8 md:pr-0">
                         <div>
-                            <h1 className="text-6xl md:text-8xl font-black mb-8 text-white leading-none tracking-tight">
+                            <h1 className="text-4xl md:text-6xl font-black mb-8 text-white leading-none tracking-tight">
                                 <span className="block animate-fade-in-up" style={{ animationDelay: '100ms' }}>Clinical Intelligence</span>
                                 <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-white to-blue-300 animate-fade-in-up pb-2" style={{ animationDelay: '300ms' }}>at Population Scale</span>
                             </h1>
                             <p className="text-white/80 text-lg font-light leading-relaxed max-w-lg mb-8 mx-auto">
-                                Arogya BioX builds software-driven screening and clinical intelligence platforms that extract actionable insights from routine diagnostic data—enabling earlier risk identification without adding operational complexity.
+                                Arogya BioX builds software-driven screening and clinical intelligence platforms that extract actionable insights from routine diagnostic data enabling earlier risk identification without adding operational complexity.
                             </p>
                         </div>
                     </div>

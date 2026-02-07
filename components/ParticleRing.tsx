@@ -346,7 +346,7 @@ const ParticleRing: React.FC<ParticleRingProps> = ({ mode }) => {
       <div className="absolute inset-0 z-10 w-full h-full flex items-center justify-center md:hidden pointer-events-none">
         <div
           className="relative w-[85%] max-w-[400px] aspect-square"
-          style={{ top: '8%' }} // Slightly lowered for better visual balance on mobile
+          style={{ top: 'auto', transform: 'translateY(-15%)' }} // Shifted up slightly from center
         >
           <img
             src="/mobile-ring.png"

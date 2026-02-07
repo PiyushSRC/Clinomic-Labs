@@ -15,9 +15,9 @@ export default async function handler(
     return response.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { name, email, phone, message } = request.body;
+  const { name, email, message } = request.body;
 
-  if (!name || !email || !phone || !message) {
+  if (!name || !email || !message) {
     return response.status(400).json({ error: 'Missing required fields' });
   }
 
@@ -32,7 +32,6 @@ export default async function handler(
           <h2>New Contact Form Submission</h2>
           <p><strong>Name:</strong> ${name}</p>
           <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Phone:</strong> ${phone}</p>
           <p><strong>Message:</strong></p>
           <p>${message}</p>
         </div>
