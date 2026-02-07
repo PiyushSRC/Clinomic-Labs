@@ -63,33 +63,28 @@ const ProductSection: React.FC = () => {
 
   useEffect(() => {
     if (isScanning) {
-      const startTime = Date.now();
-      const duration = 2000; // Match CSS animation duration (2s)
-
       const interval = setInterval(() => {
-        const elapsed = Date.now() - startTime;
-        const newProgress = Math.min(100, (elapsed / duration) * 100);
-
-        setScanProgress(newProgress);
-
-        if (newProgress >= 100) {
-          clearInterval(interval);
-          setIsScanning(false);
-          const results = [
-            { risk: "HIGH RISK", color: "text-red-500", details: "Patterns strongly suggestive of B12 insufficiency. Clinical correlation recommended." },
-            { risk: "MODERATE RISK", color: "text-yellow-500", details: "Early hematological signals detected. Consider follow-up B12/MMA testing." },
-            { risk: "LOW RISK", color: "text-blue-400", details: "No significant clinical patterns of B12 insufficiency identified." }
-          ];
-          setScanResult(results[Math.floor(Math.random() * results.length)]);
-        }
-      }, 20); // Update frequency for smooth text
-
+        setScanProgress(prev => {
+          if (prev >= 100) {
+            clearInterval(interval);
+            setIsScanning(false);
+            const results = [
+              { risk: "HIGH RISK", color: "text-red-500", details: "Patterns strongly suggestive of B12 insufficiency. Clinical correlation recommended." },
+              { risk: "MODERATE RISK", color: "text-yellow-500", details: "Early hematological signals detected. Consider follow-up B12/MMA testing." },
+              { risk: "LOW RISK", color: "text-blue-400", details: "No significant clinical patterns of B12 insufficiency identified." }
+            ];
+            setScanResult(results[Math.floor(Math.random() * results.length)]);
+            return 100;
+          }
+          return prev + 2;
+        });
+      }, 30);
       return () => clearInterval(interval);
     }
   }, [isScanning]);
 
   return (
-    <div className="relative z-20 min-h-screen py-6 md:py-24 px-6 md:px-12 lg:px-24">
+    <div className="relative z-20 min-h-screen py-8 md:py-24 px-6 md:px-12 lg:px-24">
       <style>{`
         @keyframes dash {
           to { stroke-dashoffset: -16; }
@@ -106,10 +101,6 @@ const ProductSection: React.FC = () => {
           0%, 100% { opacity: 0.8; transform: scale(1); }
           50% { opacity: 0.4; transform: scale(1.05); }
         }
-        @keyframes scan-line-smooth {
-          0% { top: 0%; box-shadow: 0 0 15px #60a5fa; }
-          100% { top: 100%; box-shadow: 0 0 25px #60a5fa; }
-        }
         .scan-line {
           height: 2px;
           background: linear-gradient(90deg, transparent, #60a5fa, transparent);
@@ -118,20 +109,17 @@ const ProductSection: React.FC = () => {
           position: absolute;
           z-index: 50;
         }
-        .animate-scan {
-          animation: scan-line-smooth 2s linear forwards;
-        }
       `}</style>
 
-      <div className="fluid-container section-container">
-        <div className="mb-12 md:mb-24 grid lg:grid-cols-2 gap-10 lg:gap-24 items-start">
+      <div className="max-w-7xl mx-auto">
+        <div className="mb-24 grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
           {/* Left Column */}
           <div className="text-left">
-            <span className="text-blue-400 text-label-2 md:text-label-1 font-bold tracking-[0.4em] uppercase mb-8 block font-heading">CURRENT PRODUCT</span>
+            <span className="text-blue-400 text-small-label md:text-label-2 font-bold tracking-[0.4em] uppercase mb-8 block font-heading">CURRENT PRODUCT</span>
             <img
               src="/clinomic-labs-logo.png"
               alt="Clinomic Labs"
-              className="h-8 md:h-[2.625rem] w-auto mb-10 object-contain"
+              className="h-[32px] md:h-[42px] w-auto mb-10 object-contain"
             />
 
             <div className="border-l-2 border-blue-400/50 pl-6 mb-10">
@@ -151,7 +139,7 @@ const ProductSection: React.FC = () => {
           </div>
 
           {/* Right Column */}
-          <div className="mt-8 lg:mt-0">
+          <div className="mt-12 lg:mt-0">
             <div className="glass-effect p-12 rounded-[40px] border border-white/10 hover:border-blue-400/30 hover:bg-white/[0.04] transition-all duration-500 group">
               <h3 className="text-blue-300 text-small-label md:text-label-2 font-bold uppercase tracking-widest mb-10 font-heading">HOW IT INTERPRETS</h3>
               <p className="text-white/90 text-body-2 md:text-body-1 font-light leading-relaxed mb-10 font-body">
@@ -176,7 +164,7 @@ const ProductSection: React.FC = () => {
         </div>
 
         {/* INTERACTIVE SIMULATOR */}
-        <div className="mb-16 md:mb-32 reveal stagger-1">
+        <div className="mb-32 reveal stagger-1">
           <div className="w-full">
             <div className="glass-effect p-8 md:p-12 rounded-[40px] border border-white/20 relative overflow-hidden group hover:border-blue-400/30 hover:bg-white/[0.04] transition-all duration-500">
               <div className="flex justify-between items-center mb-10">
@@ -190,20 +178,18 @@ const ProductSection: React.FC = () => {
 
               <div className="space-y-4 relative">
                 {isScanning && (
-                  <div className="scan-line animate-scan"></div>
+                  <div className="scan-line" style={{ top: `${scanProgress}%` }}></div>
                 )}
 
-                <div className="w-full overflow-x-auto">
-                  <div className="grid gap-4 h-[20rem] overflow-y-auto pr-2 md:h-auto md:overflow-visible md:pr-0" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 280px), 1fr))" }}>
-                    {patientData.map((row, idx) => (
-                      <div key={idx} className="flex flex-wrap justify-between items-center py-2.5 border-b border-white/5 group-hover:border-white/10 transition-colors gap-4">
-                        <span className="text-xs text-white/70 group-hover:text-white transition-colors uppercase tracking-wider font-heading">{row.l}</span>
-                        <span className="text-xs font-mono text-white flex gap-2">
-                          {row.v} <span className="text-[10px] text-white/30">{row.u}</span>
-                        </span>
-                      </div>
-                    ))}
-                  </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-3 h-[320px] overflow-y-auto pr-2 md:h-auto md:overflow-visible md:pr-0">
+                  {patientData.map((row, idx) => (
+                    <div key={idx} className="flex justify-between items-center py-2.5 border-b border-white/5 group-hover:border-white/10 transition-colors">
+                      <span className="text-xs text-white/70 group-hover:text-white transition-colors uppercase tracking-wider font-heading">{row.l}</span>
+                      <span className="text-xs font-mono text-white flex gap-2">
+                        {row.v} <span className="text-[10px] text-white/30">{row.u}</span>
+                      </span>
+                    </div>
+                  ))}
                 </div>
               </div>
 
@@ -221,7 +207,7 @@ const ProductSection: React.FC = () => {
                   <button
                     disabled={isScanning}
                     onClick={startSimulation}
-                    className={`w-full min-h-12 py-4 px-6 rounded-full border border-blue-400/30 text-blue-300 text-xs font-bold uppercase tracking-widest transition-all font-heading ${isScanning ? 'opacity-50' : 'hover:bg-blue-400/10 hover:border-blue-400 active:scale-95'}`}
+                    className={`w-full py-5 rounded-full border border-blue-400/30 text-blue-300 text-xs font-bold uppercase tracking-widest transition-all font-heading ${isScanning ? 'opacity-50' : 'hover:bg-blue-400/10 hover:border-blue-400 active:scale-95'}`}
                   >
                     {isScanning ? `Analyzing Pattern... ${Math.round(scanProgress)}%` : "Start Clinical Scan"}
                   </button>
@@ -236,23 +222,23 @@ const ProductSection: React.FC = () => {
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 md:gap-20 mb-16 md:mb-32">
+        <div className="grid lg:grid-cols-2 gap-12 md:gap-20 mb-32">
           <div className="space-y-8 md:space-y-12 reveal-left">
             <div className="group">
-              <h3 className="text-lg md:text-label-1 font-bold uppercase tracking-widest mb-4 font-heading">The Clinical Gap</h3>
-              <p className="text-white font-light text-sm md:text-lg leading-relaxed opacity-80 group-hover:opacity-100 transition-opacity font-body">
+              <h3 className="text-blue-300 text-xs font-bold uppercase tracking-widest mb-4 font-heading">The Clinical Gap</h3>
+              <p className="text-white font-light text-lg leading-relaxed opacity-80 group-hover:opacity-100 transition-opacity font-body">
                 Vitamin B12 deficiency is highly prevalent and frequently underdiagnosed—especially in early stages where symptoms are subtle and anemia may be absent.
               </p>
             </div>
             <div className="group">
-              <p className="text-white font-light text-sm md:text-lg leading-relaxed opacity-80 group-hover:opacity-100 transition-opacity font-body">
+              <p className="text-white font-light text-lg leading-relaxed opacity-80 group-hover:opacity-100 transition-opacity font-body">
                 Although CBC tests are routinely performed, early hematological signals suggestive of B12 insufficiency are often missed or underutilized. Clinomic Labs addresses this gap by systematically analyzing CBC patterns that already exist in laboratory data.
               </p>
             </div>
           </div>
 
           <div className="glass-effect p-8 md:p-10 rounded-[40px] border border-white/10 hover:border-blue-400/30 hover:bg-white/[0.04] hover:-translate-y-1 transition-all duration-500 reveal-right stagger-1">
-            <h3 className="text-blue-400 text-xs font-bold uppercase tracking-widest mb-8 font-heading">System Characteristics</h3>
+            <h3 className="text-white/80 text-xs font-bold uppercase tracking-widest mb-8 text-center font-heading">System Characteristics</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {[
                 "HL7 & CSV Secure Integration",
@@ -266,15 +252,15 @@ const ProductSection: React.FC = () => {
                   <svg className="w-4 h-4 text-blue-400 shrink-0 group-hover/item:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                   </svg>
-                  <span className="text-sm md:text-sm text-white font-medium group-hover/item:text-blue-200 transition-colors font-body">{item}</span>
+                  <span className="text-sm text-white font-medium group-hover/item:text-blue-200 transition-colors font-body">{item}</span>
                 </div>
               ))}
             </div>
           </div>
         </div>
 
-        <div className="relative mb-16 md:mb-32 reveal">
-          <h3 className="text-center text-white/60 text-xs md:text-small-label font-bold uppercase tracking-[0.4em] mb-16 font-heading">How Clinomic Labs Works</h3>
+        <div className="relative mb-32 reveal">
+          <h3 className="text-center text-white/60 text-small-label font-bold uppercase tracking-[0.4em] mb-16 font-heading">How Clinomic Labs Works</h3>
 
           <div className="relative max-w-6xl mx-auto">
             <div className="absolute top-[24px] lg:top-[28px] left-[10%] right-[10%] h-px hidden md:block pointer-events-none">
@@ -284,7 +270,7 @@ const ProductSection: React.FC = () => {
               </svg>
             </div>
 
-            <div className="grid gap-8 px-4" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 280px), 1fr))" }}>
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-12 md:gap-4 lg:gap-8 px-4">
               {steps.map((step, i) => (
                 <div key={i} className={`relative z-10 flex flex-col items-center text-center group reveal stagger-${(i % 3) + 1}`}>
                   <div className="relative mb-8">
@@ -315,19 +301,19 @@ const ProductSection: React.FC = () => {
           </div>
         </div>
 
-        <div className="max-w-[90%] mx-auto border-t border-white/10 pt-16 md:pt-24 text-center">
-          <div className="max-w-4xl mx-auto mb-8 md:mb-16">
-            <span className="text-blue-300 text-label-2 md:text-label-1 font-bold tracking-[0.4em] uppercase mb-8 block font-heading">Future Roadmap</span>
-            <h2 className="text-2xl md:text-h1 mb-10 leading-[1.1] font-heading">
+        <div className="max-w-7xl mx-auto border-t border-white/10 pt-24 text-center">
+          <div className="max-w-4xl mx-auto mb-16">
+            <span className="text-blue-300 text-small-label font-bold tracking-[0.4em] uppercase mb-8 block font-heading">Future Roadmap</span>
+            <h2 className="text-h2 md:text-h1 mb-10 leading-[1.1] font-heading">
               <span className="font-bold text-white">Preventive Health</span> <br />
-              <span className="text-xl md:text-h2 font-light text-blue-400/80 uppercase tracking-widest block mt-4">(Upcoming)</span>
+              <span className="text-h3 md:text-h2 font-light text-blue-400/80 uppercase tracking-widest block mt-4">(Upcoming)</span>
             </h2>
             <p className="text-white text-body-1 font-light leading-relaxed font-body max-w-2xl mx-auto mb-12">
               We are expanding the Clinomic intelligence engine to address critical gaps in preventive screening. By leveraging existing diagnostic panels, we aim to identify health risks earlier and more accurately.
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16">
+          <div className="grid lg:grid-cols-2 gap-16">
             <div className="reveal-left">
               <div className="flex flex-col gap-4">
                 {[
@@ -336,34 +322,34 @@ const ProductSection: React.FC = () => {
                   { t: "Hormonal Health Signals", d: "Extracting subtle clinical markers from routine hematology and chemistry labs." }
                 ].map((item, idx) => (
                   <div key={idx} className="glass-effect p-6 rounded-[40px] border border-white/20 hover:border-blue-400/40 hover:-translate-x-1 transition-all duration-500 group text-left">
-                    <div className="text-lg md:text-label-1 font-bold text-blue-300 uppercase tracking-widest mb-1 group-hover:text-blue-400 transition-colors font-heading">{item.t}</div>
-                    <p className="text-sm md:text-body-2 text-white/80 font-light group-hover:text-white transition-colors font-body">{item.d}</p>
+                    <div className="text-label-1 font-bold text-blue-300 uppercase tracking-widest mb-1 group-hover:text-blue-400 transition-colors font-heading">{item.t}</div>
+                    <p className="text-body-2 text-white/80 font-light group-hover:text-white transition-colors font-body">{item.d}</p>
                   </div>
                 ))}
               </div>
             </div>
 
             <div className="relative reveal-right stagger-1 h-full">
-              <div className="glass-effect h-full min-h-[auto] md:min-h-[480px] rounded-[40px] border border-white/10 p-8 md:p-12 flex flex-col justify-center relative overflow-hidden group hover:border-blue-400/30 transition-all duration-700">
-                <div className="absolute top-[-20%] right-[-20%] w-[60%] h-[60%] bg-blue-500/10 blur-[100px] rounded-full transition-all duration-1000"></div>
+              <div className="glass-effect h-full min-h-[480px] rounded-[40px] border border-white/10 p-12 flex flex-col justify-center relative overflow-hidden group hover:border-blue-400/30 hover:bg-white/[0.04] transition-all duration-700">
+                <div className="absolute top-[-20%] right-[-20%] w-[60%] h-[60%] bg-blue-500/10 blur-[100px] rounded-full group-hover:bg-blue-400/20 transition-all duration-1000"></div>
 
-                <h3 className="text-2xl md:text-h1 font-light mb-8 text-center group-hover:text-white transition-colors font-heading">Screening at the <span className="font-medium">Point of Routine</span></h3>
-                <p className="text-white/80 text-sm md:text-body-2 font-light text-center leading-relaxed mb-12 group-hover:text-white transition-colors font-body">
+                <h3 className="text-h1 font-light mb-8 text-center group-hover:text-white transition-colors font-heading">Screening at the <span className="font-medium">Point of Routine</span></h3>
+                <p className="text-white/80 text-body-2 font-light text-center leading-relaxed mb-12 group-hover:text-white transition-colors font-body">
                   Our roadmap focuses on closing the screening gap globally by making preventive health insights a standard part of every annual lab visit.
                 </p>
 
                 <div className="space-y-4 max-w-sm mx-auto w-full">
                   <div className="flex justify-between items-center py-3 border-b border-white/10 group-hover:border-white/20 transition-colors">
-                    <span className="text-xs md:text-small-label uppercase tracking-widest font-bold text-white/70 font-heading">Phase</span>
-                    <span className="text-sm md:text-body-2 text-blue-300 font-medium font-body">Research & Development</span>
+                    <span className="text-small-label uppercase tracking-widest font-bold text-white/70 font-heading">Phase</span>
+                    <span className="text-body-2 text-blue-300 font-medium font-body">Research & Development</span>
                   </div>
                   <div className="flex justify-between items-center py-3 border-b border-white/10 group-hover:border-white/20 transition-colors">
-                    <span className="text-xs md:text-small-label uppercase tracking-widest font-bold text-white/70 font-heading">Primary Marker</span>
-                    <span className="text-sm md:text-body-2 text-white font-body">Ferritin & CBC Composite</span>
+                    <span className="text-small-label uppercase tracking-widest font-bold text-white/70 font-heading">Primary Marker</span>
+                    <span className="text-body-2 text-white font-body">Ferritin & CBC Composite</span>
                   </div>
                   <div className="flex justify-between items-center py-3 group-hover:border-white/20 transition-colors">
-                    <span className="text-xs md:text-small-label uppercase tracking-widest font-bold text-white/70 font-heading">Integration</span>
-                    <span className="text-sm md:text-body-2 text-white font-body">Standard Multi-Analyzer</span>
+                    <span className="text-small-label uppercase tracking-widest font-bold text-white/70 font-heading">Integration</span>
+                    <span className="text-body-2 text-white font-body">Standard Multi-Analyzer</span>
                   </div>
                 </div>
 
@@ -374,16 +360,16 @@ const ProductSection: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className="max-w-[90%] mx-auto border-t border-white/10 pt-16 md:pt-24 mt-16 md:mt-32">
+        <div className="max-w-7xl mx-auto border-t border-white/10 pt-24 mt-32">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
             {/* Box 1 */}
-            <div className="glass-effect p-6 md:p-12 rounded-[40px] border border-white/10 flex flex-col justify-between md:hover:-translate-y-2 md:hover:border-blue-400/30 transition-all duration-500 group reveal-left">
+            <div className="glass-effect p-8 md:p-12 rounded-[40px] border border-white/10 flex flex-col justify-between hover:-translate-y-2 hover:border-blue-400/30 hover:bg-white/[0.04] transition-all duration-500 group reveal-left">
               <div>
-                <span className="text-blue-300 text-lg md:text-label-1 font-bold tracking-[0.4em] uppercase mb-6 block font-heading">Lab Intelligence</span>
-                <h3 className="text-2xl md:text-h1 font-light mb-8 transition-colors group-hover:text-blue-100 font-heading">
+                <span className="text-blue-300 text-small-label font-bold tracking-[0.4em] uppercase mb-6 block font-heading">Lab Intelligence</span>
+                <h3 className="text-h1 font-light mb-8 transition-colors group-hover:text-blue-100 font-heading">
                   How Clinomic Labs Helps <span className="font-medium text-white">Laboratories</span>
                 </h3>
-                <p className="text-white text-sm md:text-body-1 mb-10 leading-relaxed font-light opacity-90 group-hover:opacity-100 transition-opacity font-body">
+                <p className="text-white text-body-1 mb-10 leading-relaxed font-light opacity-90 group-hover:opacity-100 transition-opacity font-body">
                   Turn Routine CBCs into a Value-Added Screening Service. Extract additional clinical insight from tests you already perform—without changing workflows, equipment, or sample collection.
                 </p>
                 <ul className="space-y-6 mb-10">
@@ -406,13 +392,13 @@ const ProductSection: React.FC = () => {
             </div>
 
             {/* Box 2 */}
-            <div className="glass-effect p-6 md:p-12 rounded-[40px] border border-white/10 flex flex-col justify-between md:hover:-translate-y-2 md:hover:border-blue-400/30 transition-all duration-500 group reveal-right">
+            <div className="glass-effect p-8 md:p-12 rounded-[40px] border border-white/10 flex flex-col justify-between hover:-translate-y-2 hover:border-blue-400/30 hover:bg-white/[0.04] transition-all duration-500 group reveal-right">
               <div>
-                <span className="text-blue-300 text-lg md:text-label-1 font-bold tracking-[0.4em] uppercase mb-6 block font-heading">Patient Care</span>
-                <h3 className="text-2xl md:text-h1 font-light mb-8 transition-colors group-hover:text-blue-100 font-heading">
+                <span className="text-blue-300 text-small-label font-bold tracking-[0.4em] uppercase mb-6 block font-heading">Patient Care</span>
+                <h3 className="text-h1 font-light mb-8 transition-colors group-hover:text-blue-100 font-heading">
                   How Clinomic Labs Helps <span className="font-medium text-white">Patients</span>
                 </h3>
-                <p className="text-white text-sm md:text-body-1 mb-10 leading-relaxed font-light opacity-90 group-hover:opacity-100 transition-opacity font-body">
+                <p className="text-white text-body-1 mb-10 leading-relaxed font-light opacity-90 group-hover:opacity-100 transition-opacity font-body">
                   Earlier Awareness Without Additional Tests. Many patients with Vitamin B12 deficiency remain undiagnosed until symptoms become severe.
                 </p>
                 <ul className="space-y-6 mb-10">
@@ -436,7 +422,7 @@ const ProductSection: React.FC = () => {
           </div>
         </div>
       </div>
-    </div >
+    </div>
   );
 };
 

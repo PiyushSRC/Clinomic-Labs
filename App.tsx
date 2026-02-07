@@ -19,7 +19,7 @@ const App: React.FC = () => {
   useEffect(() => {
     const observerOptions = {
       threshold: 0.1,
-      rootMargin: "0px 0px 100px 0px"
+      rootMargin: "0px 0px -50px 0px"
     };
 
     const observer = new IntersectionObserver((entries) => {
@@ -88,7 +88,7 @@ const App: React.FC = () => {
           <PricingSection />
         </section>
 
-        <section id="contact" className="relative md:border-t md:border-white/10 scroll-mt-28 md:scroll-mt-32">
+        <section id="contact" className="relative md:border-t md:border-white/10 scroll-mt-20 md:scroll-mt-24">
           <ContactSection />
         </section>
       </main>

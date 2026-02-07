@@ -7,18 +7,18 @@ const PricingSection: React.FC = () => {
   };
 
   return (
-    <div className="relative z-20 py-6 md:py-24 px-6 md:px-12 lg:px-24 flex flex-col justify-center">
-      <div className="max-w-[90%] mx-auto w-full">
-        <div className="text-center mb-10 md:mb-32">
-          <span className="text-blue-300 text-label-2 md:text-label-1 font-bold tracking-[0.4em] uppercase mb-6 block font-heading">Commercial Model</span>
+    <div className="relative z-20 py-8 md:py-24 px-6 md:px-12 lg:px-24 flex flex-col justify-center">
+      <div className="max-w-7xl mx-auto w-full">
+        <div className="text-center mb-20 md:mb-32">
+          <span className="text-blue-300 text-small-label font-bold tracking-[0.4em] uppercase mb-6 block font-heading">Commercial Model</span>
           <h2 className="text-h2 lg:text-h1 font-light mb-8 font-heading">Flexible <span className="font-medium italic text-blue-300">BioSaaS</span> Model</h2>
           <p className="text-white/80 text-body-1 max-w-2xl mx-auto font-light leading-relaxed font-body">
             Designed to scale efficiently with laboratory throughput while maintaining predictable costs.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-16 md:mb-32">
-          <div className="glass-effect p-6 md:p-12 rounded-[40px] border border-blue-400/30 relative overflow-hidden group hover:border-blue-400/50 hover:-translate-y-2 transition-all duration-500 md:hover:border-blue-400/50 md:hover:-translate-y-2">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-12 mb-32">
+          <div className="glass-effect p-12 rounded-[40px] border border-blue-400/30 relative overflow-hidden group hover:border-blue-400/50 hover:bg-white/[0.04] hover:-translate-y-2 transition-all duration-500">
             <div className="absolute top-0 right-0 bg-blue-400 text-black text-small-label font-bold uppercase tracking-widest px-8 py-3 rounded-bl-3xl group-hover:bg-blue-300 transition-colors font-heading">
               Laboratory Integrated
             </div>
@@ -72,7 +72,7 @@ const PricingSection: React.FC = () => {
           </div>
         </div>
 
-        <div className="glass-effect p-6 md:p-12 rounded-[40px] border border-white/10 hover:bg-white/[0.04] hover:border-white/20 hover:-translate-y-1 transition-all duration-500 group">
+        <div className="glass-effect p-12 rounded-[40px] border border-white/10 hover:bg-white/[0.04] hover:border-white/20 hover:-translate-y-1 transition-all duration-500 group">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-12">
             <div className="max-w-xl">
               <span className="text-white/60 text-small-label font-bold uppercase tracking-widest mb-4 block font-heading">Trust & Governance</span>
