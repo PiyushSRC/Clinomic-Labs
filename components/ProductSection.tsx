@@ -123,7 +123,7 @@ const ProductSection: React.FC = () => {
         }
       `}</style>
 
-      <div className="max-w-7xl mx-auto">
+      <div className="fluid-container section-container">
         <div className="mb-12 md:mb-24 grid lg:grid-cols-2 gap-10 lg:gap-24 items-start">
           {/* Left Column */}
           <div className="text-left">
@@ -131,7 +131,7 @@ const ProductSection: React.FC = () => {
             <img
               src="/clinomic-labs-logo.png"
               alt="Clinomic Labs"
-              className="h-[32px] md:h-[42px] w-auto mb-10 object-contain"
+              className="h-8 md:h-[2.625rem] w-auto mb-10 object-contain"
             />
 
             <div className="border-l-2 border-blue-400/50 pl-6 mb-10">
@@ -193,15 +193,17 @@ const ProductSection: React.FC = () => {
                   <div className="scan-line animate-scan"></div>
                 )}
 
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-x-12 md:gap-x-24 gap-y-3 h-[320px] overflow-y-auto pr-2 md:h-auto md:overflow-visible md:pr-0">
-                  {patientData.map((row, idx) => (
-                    <div key={idx} className="flex justify-between items-center py-2.5 border-b border-white/5 group-hover:border-white/10 transition-colors">
-                      <span className="text-xs text-white/70 group-hover:text-white transition-colors uppercase tracking-wider font-heading">{row.l}</span>
-                      <span className="text-xs font-mono text-white flex gap-2">
-                        {row.v} <span className="text-[10px] text-white/30">{row.u}</span>
-                      </span>
-                    </div>
-                  ))}
+                <div className="w-full overflow-x-auto">
+                  <div className="grid gap-4 h-[20rem] overflow-y-auto pr-2 md:h-auto md:overflow-visible md:pr-0" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 280px), 1fr))" }}>
+                    {patientData.map((row, idx) => (
+                      <div key={idx} className="flex flex-wrap justify-between items-center py-2.5 border-b border-white/5 group-hover:border-white/10 transition-colors gap-4">
+                        <span className="text-xs text-white/70 group-hover:text-white transition-colors uppercase tracking-wider font-heading">{row.l}</span>
+                        <span className="text-xs font-mono text-white flex gap-2">
+                          {row.v} <span className="text-[10px] text-white/30">{row.u}</span>
+                        </span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
 
@@ -219,7 +221,7 @@ const ProductSection: React.FC = () => {
                   <button
                     disabled={isScanning}
                     onClick={startSimulation}
-                    className={`w-full py-5 rounded-full border border-blue-400/30 text-blue-300 text-xs font-bold uppercase tracking-widest transition-all font-heading ${isScanning ? 'opacity-50' : 'hover:bg-blue-400/10 hover:border-blue-400 active:scale-95'}`}
+                    className={`w-full min-h-12 py-4 px-6 rounded-full border border-blue-400/30 text-blue-300 text-xs font-bold uppercase tracking-widest transition-all font-heading ${isScanning ? 'opacity-50' : 'hover:bg-blue-400/10 hover:border-blue-400 active:scale-95'}`}
                   >
                     {isScanning ? `Analyzing Pattern... ${Math.round(scanProgress)}%` : "Start Clinical Scan"}
                   </button>
@@ -282,7 +284,7 @@ const ProductSection: React.FC = () => {
               </svg>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-12 md:gap-4 lg:gap-8 px-4">
+            <div className="grid gap-8 px-4" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 280px), 1fr))" }}>
               {steps.map((step, i) => (
                 <div key={i} className={`relative z-10 flex flex-col items-center text-center group reveal stagger-${(i % 3) + 1}`}>
                   <div className="relative mb-8">
@@ -313,7 +315,7 @@ const ProductSection: React.FC = () => {
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto border-t border-white/10 pt-16 md:pt-24 text-center">
+        <div className="max-w-[90%] mx-auto border-t border-white/10 pt-16 md:pt-24 text-center">
           <div className="max-w-4xl mx-auto mb-8 md:mb-16">
             <span className="text-blue-300 text-label-2 md:text-label-1 font-bold tracking-[0.4em] uppercase mb-8 block font-heading">Future Roadmap</span>
             <h2 className="text-2xl md:text-h1 mb-10 leading-[1.1] font-heading">
@@ -372,7 +374,7 @@ const ProductSection: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className="max-w-7xl mx-auto border-t border-white/10 pt-16 md:pt-24 mt-16 md:mt-32">
+        <div className="max-w-[90%] mx-auto border-t border-white/10 pt-16 md:pt-24 mt-16 md:mt-32">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
             {/* Box 1 */}
             <div className="glass-effect p-6 md:p-12 rounded-[40px] border border-white/10 flex flex-col justify-between md:hover:-translate-y-2 md:hover:border-blue-400/30 transition-all duration-500 group reveal-left">

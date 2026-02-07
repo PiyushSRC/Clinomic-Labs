@@ -49,7 +49,7 @@ const Navbar: React.FC = () => {
             <button
               key={link.id}
               onClick={() => scrollTo(link.id)}
-              className="text-white/80 hover:text-white transition-colors font-body text-cta-sm font-semibold uppercase tracking-widest"
+              className="min-h-[48px] px-4 flex items-center text-white/80 hover:text-white transition-colors font-body text-cta-sm font-semibold uppercase tracking-widest"
             >
               {link.label}
             </button>

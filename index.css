@@ -71,8 +71,11 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
+  width: 100%;
+  /* Viewport Fix */
   overflow-y: auto;
   overflow-x: hidden;
+  /* Viewport Fix */
 }
 
 @layer base {
@@ -82,6 +85,16 @@ body {
 }
 
 @layer utilities {
+
+  /* Fluid Typography */
+  .text-fluid-body {
+    font-size: clamp(1rem, 0.95rem + 0.25vw, 1.25rem);
+  }
+
+  .text-fluid-heading {
+    font-size: clamp(1.5rem, 5vw, 3rem);
+  }
+
   .glass-effect {
     background: rgba(255, 255, 255, 0.02);
     backdrop-filter: blur(12px);

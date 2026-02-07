@@ -8,7 +8,7 @@ const PricingSection: React.FC = () => {
 
   return (
     <div className="relative z-20 py-6 md:py-24 px-6 md:px-12 lg:px-24 flex flex-col justify-center">
-      <div className="max-w-7xl mx-auto w-full">
+      <div className="max-w-[90%] mx-auto w-full">
         <div className="text-center mb-10 md:mb-32">
           <span className="text-blue-300 text-label-2 md:text-label-1 font-bold tracking-[0.4em] uppercase mb-6 block font-heading">Commercial Model</span>
           <h2 className="text-h2 lg:text-h1 font-light mb-8 font-heading">Flexible <span className="font-medium italic text-blue-300">BioSaaS</span> Model</h2>

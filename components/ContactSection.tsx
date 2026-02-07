@@ -51,7 +51,7 @@ const ContactSection: React.FC = () => {
 
   return (
     <div className="relative z-20 md:min-h-screen pt-8 md:pt-32 pb-8 px-4 md:px-12 lg:px-24 bg-gradient-to-t from-blue-900/5 to-transparent flex flex-col justify-center">
-      <div className="max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-6 md:gap-20 items-start">
+      <div className="fluid-container section-container w-full grid lg:grid-cols-2 gap-6 md:gap-20 items-start">
         <div className="space-y-4 md:space-y-16">
           <h2 className="text-4xl md:text-8xl lg:text-9xl font-light tracking-tighter leading-[0.9] font-heading">
             Get <br className="hidden md:block" />
@@ -132,7 +132,7 @@ const ContactSection: React.FC = () => {
             <button
               type="submit"
               disabled={status === 'loading'}
-              className="w-full py-4 md:py-5 bg-blue-400 hover:bg-blue-500 disabled:bg-blue-400/50 disabled:cursor-not-allowed text-white rounded-full text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase transition-all shadow-[0_10px_30px_rgba(96,165,250,0.2)] active:scale-[0.98] font-heading"
+              className="w-full min-h-12 py-4 md:py-5 bg-blue-400 hover:bg-blue-500 disabled:bg-blue-400/50 disabled:cursor-not-allowed text-white rounded-full text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase transition-all shadow-[0_10px_30px_rgba(96,165,250,0.2)] active:scale-[0.98] font-heading"
             >
               {status === 'loading' ? 'Sending...' : 'Send Message'}
             </button>

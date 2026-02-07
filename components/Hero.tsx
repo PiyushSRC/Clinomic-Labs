@@ -12,7 +12,7 @@ const Hero: React.FC<HeroProps> = ({ onToggleMode }) => {
 
   return (
     <div className="relative z-20 min-h-screen flex flex-col items-center px-6 md:px-12 lg:px-24 pt-4 md:pt-10 pb-32 md:pb-40 justify-start md:justify-center">
-      <div className="w-full max-w-7xl mx-auto flex flex-col items-center justify-start md:justify-center gap-2 lg:gap-20 flex-grow md:flex-grow-0">
+      <div className="fluid-container section-container flex flex-col items-center justify-start md:justify-center gap-2 lg:gap-20 flex-grow md:flex-grow-0">
         <div className="w-full flex flex-col items-center text-center group/hero-text flex-grow md:flex-grow-0">
           <h1
             className="text-display-2 md:text-display-1 font-heading font-light leading-[1.1] md:leading-[1] mb-2 md:mb-10 tracking-tight text-white cursor-default"
@@ -30,18 +30,18 @@ const Hero: React.FC<HeroProps> = ({ onToggleMode }) => {
           </p>
 
           {/* Mobile Spacer - Flex grow to push buttons to bottom, leaving center empty for image */}
-          <div className="flex-grow min-h-[200px] mb-6 md:hidden w-full"></div>
+          <div className="flex-grow min-h-[20vh] mb-6 md:hidden w-full"></div>
 
-          <div className="flex flex-col sm:flex-row gap-6 w-full sm:w-auto">
+          <div className="flex flex-col sm:flex-row sm:flex-wrap gap-6 w-full sm:w-auto">
             <button
               onClick={() => window.location.href = '/demo'}
-              className="px-8 py-4 bg-blue-500 hover:bg-blue-600 text-white rounded-full text-cta-md font-bold tracking-widest uppercase transition-all shadow-lg hover:shadow-blue-500/50 hover:scale-105 active:scale-95 text-center min-w-[200px] font-heading"
+              className="min-h-12 px-8 py-4 bg-blue-500 hover:bg-blue-600 text-white rounded-full text-cta-md font-bold tracking-widest uppercase transition-all shadow-lg hover:shadow-blue-500/50 hover:scale-105 active:scale-95 text-center min-w-[12rem] font-heading"
             >
               Request a Demo
             </button>
             <button
               onClick={() => scrollTo('contact')}
-              className="px-8 py-4 border border-white/20 hover:bg-white/5 text-white/90 hover:text-white rounded-full text-cta-md font-bold tracking-widest uppercase transition-all text-center min-w-[200px] font-heading"
+              className="min-h-12 px-8 py-4 border border-white/20 hover:bg-white/5 text-white/90 hover:text-white rounded-full text-cta-md font-bold tracking-widest uppercase transition-all text-center min-w-[12rem] font-heading"
             >
               Contact Sales
             </button>

@@ -8,7 +8,7 @@ const CompanyBackground: React.FC = () => {
 
   return (
     <div className="relative z-20 py-8 md:py-32 px-6 md:px-12 lg:px-24">
-      <div className="max-w-7xl mx-auto">
+      <div className="fluid-container section-container">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-24 items-start">
           {/* Left Column */}
           <div className="text-left">
