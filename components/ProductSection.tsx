@@ -13,7 +13,7 @@ const ProductSection: React.FC = () => {
   const [scanProgress, setScanProgress] = useState(0);
   const [scanResult, setScanResult] = useState<null | { risk: string, color: string, details: string }>(null);
 
-  // Base data configuration with numeric values for randomization
+  // Base data configuration with numeric values for randomization (Refreshed)
   const basePatientData = [
     { l: "WBC", v: 6.42, u: "10⁹/L", p: 2 },
     { l: "Lymph#", v: 1.85, u: "10⁹/L", p: 2 },
